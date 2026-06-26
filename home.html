@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Marais Fleuri</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#F6F7F4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#5C6656',
+                            gold: '#C5A880',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        ::selection {
+            background-color: #5C6656;
+            color: white;
+        }
+        
+        body {
+            background-color: #F6F7F4;
+            color: #2C3328;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F6F7F4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #5C6656;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2C3328;
+        }
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .clip-polygon {
+            clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+            transition: clip-path 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .clip-polygon.is-visible {
+            clip-path: polygon(0 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+
+        /* Subtle background shapes */
+        .leaf-shape {
+            border-radius: 0 50% 0 50%;
+        }
+        .flower-petal {
+            border-radius: 50% 50% 0 50%;
+        }
+        
+        /* Floating animations for bg elements */
+        @keyframes float {
+            0% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+            50% { transform: translateY(-20px) rotate(calc(var(--rot, 0deg) + 5deg)); }
+            100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+        }
+        .float-anim {
+            animation: float 10s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden relative">
+
+    <!-- Green Subtle Background Decorations -->
+    <!-- Hero / Top Shapes -->
+    <div class="absolute top-20 left-10 w-64 h-64 bg-brand-green/10 leaf-shape -z-10 blur-3xl float-anim" style="--rot: -12deg; animation-duration: 15s;"></div>
+    <div class="absolute top-40 right-20 w-32 h-32 bg-brand-green/15 flower-petal -z-10 blur-xl float-anim" style="--rot: 45deg; animation-duration: 12s;"></div>
+    <div class="absolute top-1/4 right-1/4 w-40 h-40 border-2 border-brand-green/20 rotate-45 -z-10 float-anim" style="--rot: 45deg;"></div>
+    <div class="absolute top-10 left-1/3 w-16 h-16 bg-[#5C6656]/20 rounded-full -z-10 float-anim" style="animation-duration: 8s;"></div>
+
+    <!-- Artisanat Shapes -->
+    <div class="absolute top-[120vh] left-5 w-48 h-48 bg-[#5C6656]/10 leaf-shape rotate-90 -z-10 float-anim" style="--rot: 90deg; animation-duration: 14s;"></div>
+    <div class="absolute top-[140vh] right-10 w-24 h-24 border border-[#5C6656]/30 rounded-full -z-10 float-anim" style="animation-duration: 10s;"></div>
+    <div class="absolute top-[160vh] left-1/4 w-32 h-32 bg-[#5C6656]/5 flower-petal -z-10 blur-2xl float-anim" style="--rot: -45deg;"></div>
+
+    <!-- Catalogue Shapes -->
+    <div class="absolute top-[250vh] right-0 w-80 h-80 bg-brand-green/10 rounded-full -z-10 blur-[80px] float-anim" style="--rot: 0deg;"></div>
+    <div class="absolute top-[280vh] left-10 w-20 h-20 border-2 border-brand-green/20 rotate-[30deg] -z-10 float-anim" style="--rot: 30deg;"></div>
+    <div class="absolute top-[320vh] right-1/4 w-40 h-40 bg-brand-green/15 leaf-shape -z-10 blur-xl float-anim" style="--rot: 15deg;"></div>
+    <div class="absolute top-[360vh] left-20 w-12 h-12 bg-brand-green/30 rounded-full -z-10 float-anim" style="--rot: 0deg;"></div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-[#F6F7F4]/90 backdrop-blur-md py-4 px-6 lg:px-12 flex justify-between items-center transition-all duration-300 border-b border-transparent">
+      <div class="w-1/3 flex items-center">
+        <span class="font-serif text-xl sm:text-2xl text-[#2C3328] font-medium tracking-wide">Le Marais Fleuri</span>
+      </div>
+      
+      <div class="w-1/3 flex justify-center">
+        <img 
+          src="https://raw.githubusercontent.com/ssbagpcm/files/refs/heads/main/ba62f9f2-a489-4539-99a6-e1c8fdf70e42_removalai_preview.png" 
+          alt="Le Marais Fleuri Logo" 
+          class="h-16 sm:h-20 md:h-24 mix-blend-multiply transition-all duration-300"
+        />
+      </div>
+
+      <div class="w-1/3 flex justify-end items-center gap-8 text-[10px] sm:text-xs font-sans uppercase tracking-[0.15em] font-medium text-[#5C6656]">
+        <a href="/" class="hidden lg:block relative group py-1 nav-home-link" data-active-section="menu">
+          <span class="group-hover:text-brand-gold transition-colors duration-300">Menu</span>
+          <span class="absolute bottom-0 left-0 w-full h-[1px] bg-brand-gold transform origin-right scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 group-hover:origin-left"></span>
+        </a>
+        <a href="#propos" class="hidden lg:block relative group py-1 nav-home-link" data-active-section="propos">
+          <span class="group-hover:text-brand-gold transition-colors duration-300">À propos</span>
+          <span class="absolute bottom-0 left-0 w-full h-[1px] bg-brand-gold transform origin-right scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 group-hover:origin-left"></span>
+        </a>
+        <a href="#mariage" class="hidden lg:block relative group py-1 nav-home-link" data-active-section="mariage">
+          <span class="group-hover:text-brand-gold transition-colors duration-300">Événements</span>
+          <span class="absolute bottom-0 left-0 w-full h-[1px] bg-brand-gold transform origin-right scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 group-hover:origin-left"></span>
+        </a>
+        <a href="/client" class="hidden lg:block relative group py-1">
+          <span class="group-hover:text-brand-gold transition-colors duration-300">Marketplace</span>
+          <span class="absolute bottom-0 left-0 w-full h-[1px] bg-brand-gold transform origin-right scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 group-hover:origin-left"></span>
+        </a>
+        <a href="/compte" class="hidden lg:block relative group py-1">
+          <span class="group-hover:text-brand-gold transition-colors duration-300">Compte</span>
+          <span class="absolute bottom-0 left-0 w-full h-[1px] bg-brand-gold transform origin-right scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 group-hover:origin-left"></span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="relative min-h-screen flex flex-col justify-center pt-32 lg:pt-40">
+        <div class="flex-1 flex flex-col lg:flex-row items-center justify-center w-full max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-16 pb-12 gap-12 lg:gap-24 relative">
+          
+          <div class="w-full lg:w-5/12 flex flex-col items-center lg:items-start text-center lg:text-left z-10 relative mt-8 md:mt-0 fade-in-section">
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-[6rem] font-serif text-[#2C3328] leading-[1.05] mb-8 font-light tracking-tight">
+              Créateur <br class="hidden lg:block" />
+              <span class="italic text-brand-green pr-2">d'émotions</span> florales
+            </h1>
+            
+            <p class="text-base md:text-lg text-[#5C6656] font-light leading-relaxed max-w-md mb-12 mx-auto lg:mx-0 fade-in-section" style="transition-delay: 0.2s">
+              Je réalise des compositions sur mesure et des bouquets harmonieux pour sublimer chaque événement de votre vie.
+            </p>
+            
+            <div class="fade-in-section" style="transition-delay: 0.4s">
+                <a href="#catalogue" class="group relative inline-flex items-center justify-center px-10 py-5 overflow-hidden border border-[#2C3328] bg-transparent">
+                    <span class="absolute inset-0 w-full h-full bg-[#2C3328] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-[0.22,1,0.36,1] z-0"></span>
+                    <span class="relative z-10 flex items-center gap-4 text-xs font-sans uppercase tracking-[0.2em] font-medium text-[#2C3328] group-hover:text-[#F6F7F4] transition-colors duration-500">
+                       Découvrir le catalogue
+                       <i data-lucide="arrow-right" class="w-[14px] h-[14px] transform group-hover:translate-x-1 transition-transform duration-300"></i>
+                    </span>
+                </a>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-7/12 relative h-[50vh] sm:h-[60vh] lg:h-[85vh] flex items-center justify-center lg:justify-end fade-in-section" style="transition-delay: 0.6s">
+            <div class="w-full h-full relative z-10 overflow-hidden rounded-t-[150px] lg:rounded-t-[300px] shadow-lg cursor-pointer hero-carousel">
+              <img 
+                src="https://raw.githubusercontent.com/ssbagpcm/files/refs/heads/main/lmf/IMG_20260619_125705.jpg" 
+                alt="Arrangement floral 1" 
+                class="absolute w-full h-full object-cover transition-opacity duration-700 ease-in-out z-10 opacity-100"
+              />
+              <img 
+                src="https://raw.githubusercontent.com/ssbagpcm/files/refs/heads/main/lmf/IMG_20260619_130351.jpg" 
+                alt="Arrangement floral 2" 
+                class="absolute w-full h-full object-cover transition-opacity duration-700 ease-in-out z-0 opacity-0"
+              />
+              <img 
+                src="https://raw.githubusercontent.com/ssbagpcm/files/refs/heads/main/lmf/IMG_20260619_130448.jpg" 
+                alt="Arrangement floral 3" 
+                class="absolute w-full h-full object-cover transition-opacity duration-700 ease-in-out z-0 opacity-0"
+              />
+              <img 
+                src="https://raw.githubusercontent.com/ssbagpcm/files/refs/heads/main/lmf/IMG_20260619_130549.jpg" 
+                alt="Arrangement floral 4" 
+                class="absolute w-full h-full object-cover transition-opacity duration-700 ease-in-out z-0 opacity-0"
+              />
+              <div class="absolute inset-0 bg-[#2C3328]/10 mix-blend-overlay pointer-events-none z-20"></div>
+            </div>
+          </div>
+        </div>
+    </header>
+
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-brand-green/30 to-transparent"></div>
+
+    <!-- Artisanat -->
+    <section id="propos" class="py-24 sm:py-40 px-4 sm:px-6 lg:px-12 bg-[#2C3328] text-white overflow-hidden relative scroll-mt-24">
+        <div class="max-w-[1500px] mx-auto">
+          <div class="text-center mb-24 md:mb-40 fade-in-section">
+            <h2 class="text-[10px] md:text-xs font-sans uppercase tracking-[0.3em] text-brand-gold mb-6 font-medium">L'Artisanat</h2>
+            <h3 class="text-4xl md:text-5xl lg:text-6xl font-serif text-white font-light">
+              Un Savoir-faire <span class="italic text-brand-gold">Dédié</span>
+            </h3>
+          </div>
+
+          <!-- Feature 1 -->
+          <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-24 mb-32 lg:mb-48 fade-in-section">
+            <div class="w-full lg:w-1/2 relative h-[50vh] md:h-[70vh] lg:h-[80vh]">
+              <!-- Small rotated decorative square behind image -->
+              <div class="absolute -top-6 -left-6 w-32 h-32 border-2 border-brand-gold/30 rotate-12 -z-10 hidden lg:block float-anim" style="--rot: 12deg; will-change: transform"></div>
+              <img src="https://images.pexels.com/photos/26829458/pexels-photo-26829458.jpeg?auto=compress&cs=tinysrgb&w=1200" class="w-full h-full object-cover rounded-sm shadow-2xl" alt="Bouquet" loading="lazy" />
+            </div>
+            <div class="w-full lg:w-1/2 flex flex-col items-start px-4 lg:px-8">
+               <span class="text-brand-gold font-serif text-6xl md:text-7xl lg:text-8xl mb-8 block font-light italic">01</span>
+               <h4 class="text-3xl md:text-4xl font-serif text-white mb-6 font-medium tracking-tight">Bouquets & Compositions</h4>
+               <p class="text-[#A2ADA0] font-light leading-relaxed text-lg max-w-md">
+                 Je réalise des arrangements sur mesure, avec patience et délicatesse. Chaque bouquet est une pièce unique, conçue pour transmettre vos émotions à travers la beauté éphémère des fleurs de saison.
+               </p>
+            </div>
+          </div>
+
+          <!-- Feature 2 -->
+          <div id="mariage" class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-24 mb-32 lg:mb-48 scroll-mt-32 bg-white/5 border border-white/10 rounded-[40px] p-6 lg:p-16 fade-in-section relative">
+            <div class="w-full lg:w-1/2 relative h-[40vh] md:h-[60vh] lg:h-[70vh]">
+              <img src="https://images.pexels.com/photos/33425305/pexels-photo-33425305.jpeg?auto=compress&cs=tinysrgb&w=1200" class="w-full h-full object-cover rounded-3xl shadow-2xl hover:scale-[1.02] transition-transform duration-700" alt="Événement" loading="lazy" />
+            </div>
+            <div class="w-full lg:w-1/2 flex flex-col items-start px-2 lg:px-8 lg:pl-16">
+               <span class="text-brand-gold font-serif text-6xl md:text-7xl lg:text-8xl mb-6 block font-light italic opacity-80">02</span>
+               <h4 class="text-3xl md:text-4xl font-serif text-white mb-6 font-medium tracking-tight">Événements</h4>
+               <p class="text-[#A2ADA0] font-light leading-relaxed text-lg max-w-md">
+                 Je vous accompagne dans chaque moment marquant : mariage, anniversaire, baptême ou décès. À l'écoute de vos envies, je fleuris vos espaces pour les rendre inoubliables.
+               </p>
+            </div>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-24 fade-in-section">
+            <div class="w-full lg:w-1/2 relative h-[50vh] md:h-[70vh] lg:h-[80vh]">
+              <!-- Small decorative circle behind image -->
+              <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-gold/10 rounded-full blur-md -z-10 hidden lg:block float-anim" style="--rot: 0deg; will-change: transform"></div>
+              <img src="https://images.pexels.com/photos/9413752/pexels-photo-9413752.jpeg?auto=compress&cs=tinysrgb&w=1200" class="w-full h-full object-cover rounded-sm shadow-2xl" alt="Atelier et Hommage" loading="lazy" />
+            </div>
+            <div class="w-full lg:w-1/2 flex flex-col items-start px-4 lg:px-8">
+               <span class="text-brand-gold font-serif text-6xl md:text-7xl lg:text-8xl mb-8 block font-light italic">03</span>
+               <h4 class="text-3xl md:text-4xl font-serif text-white mb-6 font-medium tracking-tight">Entretien</h4>
+               <p class="text-[#A2ADA0] font-light leading-relaxed text-lg max-w-md">
+                 Confiez-moi vos plantes fatiguées ou délicates : vous pouvez me les apporter en boutique pour que je m'en occupe. Du simple rempotage aux soins réparateurs, je leur redonne toute leur vitalité.
+               </p>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- Catalogue -->
+    <section id="catalogue" class="py-24 md:py-40 px-4 sm:px-6 lg:px-8 bg-white border-y border-brand-green/10 scroll-mt-24 relative overflow-hidden">
+        <div class="max-w-[1500px] mx-auto">
+          <div class="text-center mb-20 md:mb-32 fade-in-section">
+            <h2 class="text-[10px] md:text-xs font-sans uppercase tracking-[0.3em] text-brand-gold mb-6 font-medium">Catalogue</h2>
+            <h3 class="text-4xl md:text-5xl lg:text-6xl font-serif text-[#2C3328] font-light">Mes <span class="italic text-brand-green">Créations</span></h3>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-12 gap-y-16 lg:gap-y-24 relative z-10" id="products-container">
+            <!-- Injected via JS -->
+          </div>
+          <div class="mt-20 text-center border-t border-brand-green/10 pt-14 fade-in-section">
+            <p class="font-serif text-3xl md:text-5xl text-[#2C3328] font-light mb-6">Vous ne trouvez pas ce que vous voulez ?</p>
+            <a href="/client" class="group relative inline-flex items-center justify-center px-10 py-5 overflow-hidden border border-[#2C3328] bg-transparent">
+              <span class="absolute inset-0 w-full h-full bg-[#2C3328] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-[0.22,1,0.36,1] z-0"></span>
+              <span class="relative z-10 flex items-center gap-4 text-xs font-sans uppercase tracking-[0.2em] font-medium text-[#2C3328] group-hover:text-[#F6F7F4] transition-colors duration-500">
+                Marketplace
+                <i data-lucide="arrow-right" class="w-[14px] h-[14px] transform group-hover:translate-x-1 transition-transform duration-300"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+    </section>
+
+    <!-- Boutique / Carte -->
+    <section id="contact" class="py-24 md:py-40 px-4 sm:px-8 lg:px-12 bg-[#F6F7F4] relative overflow-hidden scroll-mt-24">
+        <div class="absolute top-24 left-10 w-40 h-40 bg-brand-green/10 leaf-shape -z-10 blur-2xl float-anim" style="--rot: -18deg;"></div>
+        <div class="absolute bottom-20 right-16 w-32 h-32 border border-brand-green/20 rotate-45 -z-10 float-anim" style="--rot: 45deg;"></div>
+
+        <div class="max-w-[1300px] mx-auto grid lg:grid-cols-[.8fr_1.2fr] gap-10 lg:gap-14 items-center fade-in-section">
+          <div>
+            <p class="text-[10px] uppercase tracking-[0.3em] text-brand-gold font-semibold mb-6">La boutique</p>
+            <h2 class="font-serif text-5xl md:text-7xl font-light leading-tight mb-8">
+              Retrouvez-moi<br>
+              <span class="italic text-brand-green">à Saint-Omer</span>
+            </h2>
+            <p class="text-[#5C6656] text-lg font-light leading-relaxed mb-10 max-w-xl">
+              Venez échanger sur vos envies florales au 40 rue de Dunkerque, 62500 Saint-Omer.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <a href="tel:0666444501" class="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden border border-[#2C3328] bg-[#2C3328]">
+                <span class="relative z-10 flex items-center gap-3 text-[10px] font-sans uppercase tracking-[0.2em] font-medium text-[#F6F7F4]">
+                  <i data-lucide="phone" class="w-4 h-4"></i> Appeler
+                </span>
+              </a>
+              <a href="https://maps.google.com/?q=40+rue+de+dunkerque+saint-omer" target="_blank" rel="noreferrer" class="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden border border-[#2C3328]/30 bg-transparent">
+                <span class="relative z-10 flex items-center gap-3 text-[10px] font-sans uppercase tracking-[0.2em] font-medium text-[#2C3328] group-hover:text-brand-gold transition-colors duration-300">
+                  <i data-lucide="map-pin" class="w-4 h-4"></i> Itinéraire
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div class="bg-white/80 border border-brand-green/10 p-4 sm:p-5 shadow-sm">
+            <div class="aspect-[4/3] min-h-[360px] bg-[#EAECE8] overflow-hidden border border-brand-green/10">
+              <iframe
+                title="Carte OpenStreetMap - Le Marais Fleuri"
+                class="w-full h-full"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=2.2499618%2C50.7492057%2C2.2579618%2C50.7532057&amp;layer=mapnik&amp;marker=50.7512057%2C2.2539618"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+            <div class="mt-5 flex items-start gap-3 text-[#5C6656]">
+              <i data-lucide="map-pin" class="w-5 h-5 text-brand-gold shrink-0 mt-1"></i>
+              <p class="font-light leading-relaxed">
+                <span class="block text-[#2C3328] font-medium">Le Marais Fleuri</span>
+                40 rue de Dunkerque, 62500 Saint-Omer
+              </p>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="py-32 md:py-48 px-4 text-center bg-[#F6F7F4] relative fade-in-section overflow-hidden">
+        <div class="absolute top-1/2 left-10 w-32 h-32 border border-brand-green/15 -translate-y-1/2 rotate-45 -z-10 float-anim border-2" style="--rot: 45deg;"></div>
+        <div class="absolute top-1/4 right-20 w-24 h-24 bg-brand-green/10 leaf-shape -z-10 rotate-[60deg] float-anim" style="--rot: 60deg;"></div>
+        
+        <div class="max-w-5xl mx-auto flex flex-col items-center justify-center relative z-10">
+          <div class="flex space-x-4 text-brand-gold mb-12">
+            <i data-lucide="star" class="w-7 h-7 fill-current transform hover:scale-110 transition-transform text-brand-gold border-0"></i>
+            <i data-lucide="star" class="w-7 h-7 fill-current transform hover:scale-110 transition-transform text-brand-gold border-0"></i>
+            <i data-lucide="star" class="w-7 h-7 fill-current transform hover:scale-110 transition-transform text-brand-gold border-0"></i>
+            <i data-lucide="star" class="w-7 h-7 fill-current transform hover:scale-110 transition-transform text-brand-gold border-0"></i>
+            <i data-lucide="star" class="w-7 h-7 fill-current transform hover:scale-110 transition-transform text-brand-gold border-0"></i>
+          </div>
+          <h2 class="text-3xl md:text-5xl lg:text-6xl font-serif text-[#2C3328] leading-[1.3] font-light max-w-4xl mx-auto mb-16 relative">
+            <span class="absolute -top-10 -left-10 text-[100px] text-brand-green/10 font-sans opacity-50">"</span>
+            Une fleuriste à l'écoute, des bouquets toujours magnifiques et un choix de fleurs de grande qualité. Je recommande à 100% !
+          </h2>
+          <p class="text-brand-green tracking-[0.3em] uppercase text-xs font-semibold">
+            Basé sur 22 excellents avis
+          </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#2C3328] text-[#F6F7F4] pt-32 pb-12 px-4 border-t border-[#3F4A38] relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-[200%] bg-brand-green/20 blur-[120px] rounded-full pointer-events-none transform translate-x-1/4 -translate-y-1/4"></div>
+        <div class="absolute bottom-10 right-10 w-48 h-48 border border-[#5C6656]/30 rotate-45 pointer-events-none float-anim" style="--rot: 45deg;"></div>
+        
+        <div class="max-w-[1500px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 mb-24 relative z-10 fade-in-section">
+          
+          <div class="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
+            <img 
+              src="https://raw.githubusercontent.com/ssbagpcm/files/refs/heads/main/ba62f9f2-a489-4539-99a6-e1c8fdf70e42_removalai_preview.png" 
+              alt="Le Marais Fleuri Logo" 
+              class="w-40 sm:w-48 object-contain mb-8 opacity-90"
+            />
+            <h2 class="font-serif text-3xl mb-6 text-white font-light">Le Marais Fleuri</h2>
+            <p class="text-[#A2ADA0] font-light leading-relaxed max-w-sm mb-8">
+              Artisan fleuriste à Saint-Omer. Des créations florales uniques pour sublimer chaque instant de votre vie, conçues avec passion et délicatesse.
+            </p>
+          </div>
+
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-8 pt-4">
+            <div class="flex flex-col items-center sm:items-start group">
+              <h3 class="text-[10px] sm:text-xs font-semibold tracking-[0.2em] text-brand-gold uppercase mb-6 sm:mb-8">Boutique</h3>
+              <a href="https://maps.google.com/?q=40+rue+de+dunkerque+saint-omer" target="_blank" rel="noreferrer" class="inline-flex items-start gap-3 text-[#F6F7F4] hover:text-brand-gold transition-colors text-base font-light leading-relaxed opacity-90">
+                <svg class="w-5 h-5 shrink-0 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>40 rue de Dunkerque<br/>62500 Saint-Omer</span>
+              </a>
+            </div>
+
+            <div class="flex flex-col items-center sm:items-start group">
+              <h3 class="text-[10px] sm:text-xs font-semibold tracking-[0.2em] text-brand-gold uppercase mb-6 sm:mb-8">Contact</h3>
+              <a href="tel:0666444501" class="inline-flex items-center gap-3 text-[#F6F7F4] text-xl font-light hover:text-brand-gold transition-colors mb-2 opacity-90">
+                <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.78.59 2.63a2 2 0 0 1-.45 2.11L8 9.71a16 16 0 0 0 6.29 6.29l1.25-1.25a2 2 0 0 1 2.11-.45c.85.27 1.73.47 2.63.59A2 2 0 0 1 22 16.92Z"></path>
+                </svg>
+                <span>06 66 44 45 01</span>
+              </a>
+            </div>
+
+            <div class="flex flex-col items-center sm:items-start group">
+              <h3 class="text-[10px] sm:text-xs font-semibold tracking-[0.2em] text-brand-gold uppercase mb-6 sm:mb-8">Réseaux</h3>
+              <div class="flex flex-col gap-4">
+                <a href="https://instagram.com/lemaraisfleuri" target="_blank" rel="noreferrer" class="inline-flex items-center gap-3 text-[#F6F7F4] hover:text-brand-gold transition-colors text-base font-light opacity-90">
+                  <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <circle cx="17.5" cy="6.5" r="1"></circle>
+                  </svg>
+                  <span>Instagram</span>
+                </a>
+                <a href="https://www.facebook.com/p/Le-Marais-Fleuri-61579595464760/" target="_blank" rel="noreferrer" class="inline-flex items-center gap-3 text-[#F6F7F4] hover:text-brand-gold transition-colors text-base font-light opacity-90">
+                  <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.08 5.66 21.24 10.44 22v-7.03H7.9v-2.91h2.54V9.84c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.91h-2.34V22C18.34 21.24 22 17.08 22 12.06Z"></path>
+                  </svg>
+                  <span>Facebook</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="max-w-[1500px] mx-auto pt-8 border-t border-[#465140] flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-[0.1em] text-[#8C9686] font-medium space-y-6 md:space-y-0 relative z-10 fade-in-section text-center md:text-left">
+          <p class="tracking-[0.2em]">&copy; <span id="year"></span> Le Marais Fleuri. Tous droits réservés.</p>
+          <div class="space-x-8 flex items-center justify-center">
+            <a href="#" class="hover:text-brand-gold transition-colors tracking-[0.2em]">Mentions Légales</a>
+            <span class="w-1 h-1 rounded-full bg-[#8C9686]/30"></span>
+            <a href="#" class="hover:text-brand-gold transition-colors tracking-[0.2em]">Confidentialité</a>
+          </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script>
+      // Prevent automatic scroll restoration on load (fixes the issue where the page jumps to catalogue)
+      if (history.scrollRestoration) {
+          history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+
+      // Initialize Icons
+      lucide.createIcons();
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      const container = document.getElementById('products-container');
+      const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+      }[char]));
+      const renderProducts = (products) => {
+        container.innerHTML = '';
+        if (!products.length) {
+          container.innerHTML = `
+            <div class="col-span-full bg-[#F6F7F4]/70 border border-brand-green/10 p-10 md:p-16 text-center fade-in-section">
+              <i data-lucide="flower-2" class="w-10 h-10 mx-auto mb-6 text-brand-green opacity-60"></i>
+              <h3 class="text-3xl md:text-4xl font-serif text-[#2C3328] mb-4">Catalogue en préparation</h3>
+              <p class="text-[#5C6656] font-light max-w-xl mx-auto mb-8">Les produits publiés depuis l'administration apparaîtront ici automatiquement.</p>
+              <a href="/client" class="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-brand-green font-semibold hover:text-brand-gold transition-colors">
+                Ouvrir la marketplace <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+            </div>
+          `;
+          lucide.createIcons();
+          container.querySelectorAll('.fade-in-section').forEach(element => element.classList.add('is-visible'));
+          return;
+        }
+        products.slice(0, 9).forEach((product, index) => {
+          const delay = (index % 3) * 0.15;
+          const image = product.photos && product.photos.length ? product.photos[0] : "";
+          const html = `
+            <article class="group flex flex-col bg-[#F6F7F4]/50 hover:bg-white p-6 md:p-8 rounded-[40px] shadow-sm hover:shadow-2xl transition-all duration-500 border border-brand-green/10 hover:border-brand-green/30 fade-in-section" style="transition-delay: ${delay}s">
+              <a href="${escapeHtml(product.url)}" class="relative overflow-hidden aspect-[3/4] mb-8 bg-[#EAECE8] rounded-[24px] block">
+                <!-- Fallback Skeleton -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-[#8C9686] animate-pulse z-0">
+                  <i data-lucide="flower-2" class="w-10 h-10 mb-3 opacity-40"></i>
+                  <p class="text-[9px] tracking-[0.3em] uppercase font-medium opacity-60">Création en cours</p>
+                </div>
+                
+                <img 
+                  src="${escapeHtml(image)}" 
+                  alt="${escapeHtml(product.name)}" 
+                  class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-[1.5s] z-10 bg-[#EAECE8]"
+                  onerror="this.style.display='none'"
+                  onload="this.classList.remove('bg-[#EAECE8]')"
+                />
+                <div class="absolute inset-0 bg-[#2C3328]/5 transition-colors duration-500 z-20 mix-blend-overlay group-hover:bg-transparent pointer-events-none"></div>
+              </a>
+              <div class="flex flex-col text-center px-4">
+                <p class="text-[10px] uppercase tracking-[0.25em] text-brand-green mb-4 font-semibold bg-[#2C3328]/5 self-center px-5 py-2 rounded-full border border-[#2C3328]/10 group-hover:bg-[#2C3328]/10 transition-colors duration-300">${escapeHtml((product.types || [product.category]).join(' · '))}</p>
+                <a href="${escapeHtml(product.url)}" class="text-2xl lg:text-3xl font-serif text-[#2C3328] hover:text-brand-gold transition-colors duration-500 font-medium">${escapeHtml(product.name)}</a>
+              </div>
+            </article>
+          `;
+          container.insertAdjacentHTML('beforeend', html);
+        });
+        lucide.createIcons();
+        container.querySelectorAll('.fade-in-section').forEach(element => element.classList.add('is-visible'));
+      };
+
+      fetch('/api/products')
+        .then(response => response.ok ? response.json() : [])
+        .then(renderProducts)
+        .catch(() => renderProducts([]));
+
+      // Scroll Observer for Animations
+      const observerOptions = {
+          root: null,
+          rootMargin: '-50px',
+          threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+                  observer.unobserve(entry.target);
+              }
+          });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-in-section, .clip-polygon').forEach(element => {
+          observer.observe(element);
+      });
+
+      // Hero Carousel
+      const heroImages = document.querySelectorAll('.hero-carousel img');
+      if (heroImages.length > 0) {
+          let currentHeroImage = 0;
+          const showNextHeroImage = () => {
+              heroImages[currentHeroImage].classList.remove('z-10', 'opacity-100');
+              heroImages[currentHeroImage].classList.add('z-0', 'opacity-0');
+              
+              currentHeroImage = (currentHeroImage + 1) % heroImages.length;
+              
+              heroImages[currentHeroImage].classList.remove('z-0', 'opacity-0');
+              heroImages[currentHeroImage].classList.add('z-10', 'opacity-100');
+          };
+          document.querySelector('.hero-carousel').addEventListener('click', showNextHeroImage);
+          setInterval(showNextHeroImage, 2500);
+      }
+
+      // Navbar scroll effect
+      const navbar = document.getElementById('navbar');
+      const homeNavLinks = document.querySelectorAll('.nav-home-link');
+      const setHomeNavActive = () => {
+          let activeSection = '';
+          const propos = document.getElementById('propos');
+          const mariage = document.getElementById('mariage');
+          const contact = document.getElementById('contact');
+          const activationLine = 180;
+
+          if (window.scrollY < 180) {
+              activeSection = 'menu';
+          } else if (contact) {
+              const contactRect = contact.getBoundingClientRect();
+              if (contactRect.top <= activationLine && contactRect.bottom > activationLine) {
+                  activeSection = 'contact';
+              }
+          }
+
+          if (!activeSection && mariage) {
+              const mariageRect = mariage.getBoundingClientRect();
+              if (mariageRect.top <= activationLine && mariageRect.bottom > activationLine) {
+                  activeSection = 'mariage';
+              }
+          }
+
+          if (!activeSection && propos) {
+              const proposRect = propos.getBoundingClientRect();
+              if (proposRect.top <= activationLine && proposRect.bottom > activationLine) {
+                  activeSection = 'propos';
+              }
+          }
+
+          homeNavLinks.forEach(link => {
+              link.classList.toggle('text-brand-gold', link.dataset.activeSection === activeSection);
+          });
+      };
+
+      window.addEventListener('scroll', () => {
+          if (window.scrollY > 50) {
+              navbar.classList.add('border-[#2C3328]/5');
+              navbar.classList.remove('border-transparent');
+          } else {
+              navbar.classList.remove('border-[#2C3328]/5');
+              navbar.classList.add('border-transparent');
+          }
+          setHomeNavActive();
+      });
+      setHomeNavActive();
+
+    </script>
+</body>
+</html>
