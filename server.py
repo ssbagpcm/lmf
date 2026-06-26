@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import base64
-import cgi
 import hashlib
 import hmac
 import html
@@ -12,8 +11,11 @@ import shutil
 import sqlite3
 import string
 import uuid
+from email import policy
+from email.parser import BytesParser
 from http import cookies
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
+from io import BytesIO
 from pathlib import Path
 from urllib import error as urlerror
 from urllib.parse import parse_qs, unquote, urlparse
@@ -64,6 +66,16 @@ BOT_UA_MARKERS = (
     "httpx",
     "headless",
 )
+
+
+class MultipartField:
+    def __init__(self, value="", filename="", content_type="", data=b""):
+        self.value = value
+        self.filename = filename
+        self.type = content_type
+        self.file = BytesIO(data)
+
+
 PRODUCT_TYPES = ["Bouquet", "Composition", "Plantes"]
 OCCASIONS = [
     "Décès",
@@ -1774,14 +1786,39 @@ class App(BaseHTTPRequestHandler):
         self.redirect("/admin", "lmf_admin=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax")
 
     def multipart_form(self):
-        return cgi.FieldStorage(
-            fp=self.rfile,
-            headers=self.headers,
-            environ={
-                "REQUEST_METHOD": "POST",
-                "CONTENT_TYPE": self.headers.get("Content-Type", ""),
-            },
+        size = int(self.headers.get("Content-Length", "0"))
+        body = self.rfile.read(size)
+        content_type = self.headers.get("Content-Type", "")
+        raw_message = (
+            f"Content-Type: {content_type}\r\nMIME-Version: 1.0\r\n\r\n".encode("utf-8")
+            + body
         )
+        message = BytesParser(policy=policy.default).parsebytes(raw_message)
+        form = {}
+        if not message.is_multipart():
+            return form
+        for part in message.iter_parts():
+            if part.get_content_disposition() != "form-data":
+                continue
+            name = part.get_param("name", header="content-disposition")
+            if not name:
+                continue
+            filename = part.get_filename() or ""
+            content_type = part.get_content_type()
+            payload = part.get_payload(decode=True) or b""
+            value = ""
+            if not filename:
+                charset = part.get_content_charset() or "utf-8"
+                value = payload.decode(charset, "replace")
+            field = MultipartField(value, filename, content_type, payload)
+            if name in form:
+                if isinstance(form[name], list):
+                    form[name].append(field)
+                else:
+                    form[name] = [form[name], field]
+            else:
+                form[name] = field
+        return form
 
     def field_value(self, form, name):
         field = form[name] if name in form else None
